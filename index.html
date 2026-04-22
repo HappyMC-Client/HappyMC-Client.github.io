@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HappyMC Client - Minecraft Launcher</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --text-color: #c9d1d9;
+            --accent-color: #58a6ff;
+            --secondary-bg: #161b22;
+            --border-color: #30363d;
+            --button-hover: #1f6feb;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        header {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        .logo-container img {
+            max-width: 150px;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            color: #ffffff;
+        }
+
+        p.subtitle {
+            font-size: 1.2rem;
+            color: #8b949e;
+            margin-top: 0.5rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+            text-align: left;
+        }
+
+        .feature-card {
+            background-color: var(--secondary-bg);
+            padding: 1.5rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-card h3 {
+            margin-top: 0;
+            color: var(--accent-color);
+        }
+
+        .download-section {
+            background-color: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-top: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: #ffffff;
+            padding: 12px 24px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+            margin: 10px;
+        }
+
+        .btn:hover {
+            background-color: var(--button-hover);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--border-color);
+        }
+
+        .preview-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin: 2rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 2rem;
+            text-align: center;
+            color: #8b949e;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <!-- Verweist auf das logo.png aus dem Repo -->
+                <img src="logo.png" alt="HappyMC Logo">
+            </div>
+            <h1>HappyMC Client</h1>
+            <p class="subtitle">Der moderne Minecraft Launcher mit Fabric & Modrinth Support</p>
+        </header>
+
+        <!-- Vorschau-Bild des Launchers -->
+        <!-- Verweist auf HappyLaucherOPENbeta.png oder Screen.png aus dem Repo -->
+        <img src="HappyLaucherOPENbeta.png" alt="HappyMC Launcher Preview" class="preview-image">
+
+        <div class="features">
+            <div class="feature-card">
+                <h3>🚀 Einfach & Schnell</h3>
+                <p>Starte Minecraft in Sekunden. Unterstützt Versionen von 1.20 bis 1.21+ und bietet eine schlanke Oberfläche.</p>
+            </div>
+            <div class="feature-card">
+                <h3> Modernes Design</h3>
+                <p>Dunkles Theme mit anpassbaren Farben. Wechsle einfach zwischen Dark Mode und Light Mode in den Einstellungen.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📦 Mod Support</h3>
+                <p>Vollständige Integration von Fabric und Modrinth. Installiere Mods und Modpacks direkt über den Launcher.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🔐 Sicherer Login</h3>
+                <p>Sichere Microsoft-Authentifizierung oder Offline-Modus für schnellen Zugriff auf deine Welten.</p>
+            </div>
+        </div>
+
+        <div class="download-section">
+            <h2>Bereit zum Spielen?</h2>
+            <p>Lade dir die neueste Version des HappyMC Clients herunter.</p>
+            
+            <!-- Link zur neuesten Release oder direkten Datei im Repo -->
+            <!-- Da im Screenshot keine Releases sichtbar sind, verlinken wir hier exemplarisch auf die Hauptseite oder eine angenommene EXE -->
+            <a href="#" class="btn">Download für Windows (.exe)</a>
+            
+            <br><br>
+            
+            <a href="https://github.com/HappyMC-Client/HappyMC-Client.github.io" class="btn btn-secondary">Quellcode auf GitHub</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 HappyMC Client. Nicht offiziell mit Mojang oder Microsoft verbunden.</p>
+        <p>
+            <a href="https://github.com/HappyMC-Client/HappyMC-Client.github.io">GitHub Repository</a> | 
+            <a href="#">Support</a> | 
+            <a href="#">Impressum</a>
+        </p>
+    </footer>
+
+</body>
+</html>
