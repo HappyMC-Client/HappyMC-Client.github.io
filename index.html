@@ -3,197 +3,283 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HappyMC Client - Minecraft Launcher</title>
+    <title>HappyMC Client - Der nächste Generation Minecraft Launcher</title>
+    <meta name="description" content="Lade HappyMC Client herunter. Ein moderner, schneller und schöner Minecraft Launcher mit Fabric & Modrinth Support.">
+    
+    <!-- Google Fonts für einen modernen Look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --bg-color: #0d1117;
-            --text-color: #c9d1d9;
-            --accent-color: #58a6ff;
-            --secondary-bg: #161b22;
-            --border-color: #30363d;
-            --button-hover: #1f6feb;
+            --bg-dark: #09090b;
+            --bg-card: #18181b;
+            --primary: #8b5cf6; /* Helles Lila passend zum Launcher */
+            --primary-hover: #7c3aed;
+            --text-main: #f4f4f5;
+            --text-muted: #a1a1aa;
+            --border: #27272a;
+            --glow: 0 0 20px rgba(139, 92, 246, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Hintergrund-Effekt */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 0%, #2e1065 0%, var(--bg-dark) 60%);
+            z-index: -1;
         }
 
         .container {
-            max-width: 980px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 40px;
+            border-radius: 8px;
+        }
+
+        /* Hero Section */
+        .hero {
             text-align: center;
-        }
-
-        header {
-            padding: 2rem 0;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 2rem;
-        }
-
-        .logo-container img {
-            max-width: 150px;
-            height: auto;
-            border-radius: 10px;
-            margin-bottom: 1rem;
+            padding: 80px 0 60px;
         }
 
         h1 {
-            font-size: 2.5rem;
-            margin: 0;
-            color: #ffffff;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
         }
 
-        p.subtitle {
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        /* Download Button Area */
+        .download-wrapper {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 60px;
+        }
+
+        .btn-download {
+            background-color: var(--primary);
+            color: white;
+            padding: 18px 40px;
             font-size: 1.2rem;
-            color: #8b949e;
-            margin-top: 0.5rem;
+            font-weight: 600;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: var(--glow);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
+        .btn-download:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+        }
+
+        .file-info {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            background: rgba(255,255,255,0.05);
+            padding: 5px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+
+        /* Preview Image */
+        .preview-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto 80px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .preview-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Features Grid */
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 3rem 0;
-            text-align: left;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 80px;
         }
 
         .feature-card {
-            background-color: var(--secondary-bg);
-            padding: 1.5rem;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 12px;
+            transition: transform 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
         }
 
         .feature-card h3 {
-            margin-top: 0;
-            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: white;
         }
 
-        .download-section {
-            background-color: var(--secondary-bg);
-            padding: 2rem;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            margin-top: 2rem;
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
         }
 
-        .btn {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: #ffffff;
-            padding: 12px 24px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 6px;
-            transition: background-color 0.2s;
-            margin: 10px;
-        }
-
-        .btn:hover {
-            background-color: var(--button-hover);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-        }
-
-        .btn-secondary:hover {
-            background-color: var(--border-color);
-        }
-
-        .preview-image {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            margin: 2rem 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-        }
-
+        /* Footer */
         footer {
-            margin-top: auto;
-            padding: 2rem;
             text-align: center;
-            color: #8b949e;
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
             font-size: 0.9rem;
-            border-top: 1px solid var(--border-color);
         }
 
         footer a {
-            color: var(--accent-color);
+            color: var(--primary);
             text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .hero { padding: 40px 0; }
+            .btn-download { padding: 15px 30px; font-size: 1rem; }
         }
     </style>
 </head>
 <body>
 
+    <div class="bg-gradient"></div>
+
     <div class="container">
-        <header>
-            <div class="logo-container">
-                <!-- Verweist auf das logo.png aus dem Repo -->
+        <nav>
+            <a href="#" class="logo">
                 <img src="logo.png" alt="HappyMC Logo">
-            </div>
-            <h1>HappyMC Client</h1>
-            <p class="subtitle">Der moderne Minecraft Launcher mit Fabric & Modrinth Support</p>
-        </header>
+                HappyMC Client
+            </a>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">v1.0 Beta</div>
+        </nav>
 
-        <!-- Vorschau-Bild des Launchers -->
-        <!-- Verweist auf HappyLaucherOPENbeta.png oder Screen.png aus dem Repo -->
-        <img src="HappyLaucherOPENbeta.png" alt="HappyMC Launcher Preview" class="preview-image">
+        <section class="hero">
+            <h1>Minecraft neu erleben.</h1>
+            <p>Der leichteste, schnellste und schönste Launcher für deine Modded-Abenteuer. Mit integriertem Modrinth-Support und Fabric.</p>
+            
+            <div class="download-wrapper">
+                <!-- HIER IST DER LINK ZUR ZIP DATEI -->
+                <a href="HappyClientInstaller.zip" class="btn-download">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Jetzt Herunterladen
+                </a>
+                <span class="file-info">📦 HappyClientInstaller.zip • Windows 10/11</span>
+            </div>
+        </section>
 
-        <div class="features">
-            <div class="feature-card">
-                <h3>🚀 Einfach & Schnell</h3>
-                <p>Starte Minecraft in Sekunden. Unterstützt Versionen von 1.20 bis 1.21+ und bietet eine schlanke Oberfläche.</p>
-            </div>
-            <div class="feature-card">
-                <h3> Modernes Design</h3>
-                <p>Dunkles Theme mit anpassbaren Farben. Wechsle einfach zwischen Dark Mode und Light Mode in den Einstellungen.</p>
-            </div>
-            <div class="feature-card">
-                <h3>📦 Mod Support</h3>
-                <p>Vollständige Integration von Fabric und Modrinth. Installiere Mods und Modpacks direkt über den Launcher.</p>
-            </div>
-            <div class="feature-card">
-                <h3>🔐 Sicherer Login</h3>
-                <p>Sichere Microsoft-Authentifizierung oder Offline-Modus für schnellen Zugriff auf deine Welten.</p>
-            </div>
+        <div class="preview-container">
+            <!-- Das Bild aus dem Repo -->
+            <img src="HappyLaucherOPENbeta.png" alt="HappyMC Launcher Interface Screenshot">
         </div>
 
-        <div class="download-section">
-            <h2>Bereit zum Spielen?</h2>
-            <p>Lade dir die neueste Version des HappyMC Clients herunter.</p>
-            
-            <!-- Link zur neuesten Release oder direkten Datei im Repo -->
-            <!-- Da im Screenshot keine Releases sichtbar sind, verlinken wir hier exemplarisch auf die Hauptseite oder eine angenommene EXE -->
-            <a href="#" class="btn">Download für Windows (.exe)</a>
-            
-            <br><br>
-            
-            <a href="https://github.com/HappyMC-Client/HappyMC-Client.github.io" class="btn btn-secondary">Quellcode auf GitHub</a>
-        </div>
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Blitzschneller Start</h3>
+                <p>Optimiert für Performance. Starte Vanilla oder Fabric Instanzen in Sekunden ohne unnötigen Ballast.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Modernes UI</h3>
+                <p>Ein sauberes, dunkles Design mit anpassbaren Farben. Wechsle einfach zwischen Dark und Light Mode.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <h3>Modrinth Integration</h3>
+                <p>Durchsuche und installiere Mods direkt im Launcher. Kein umständliches manuelles Kopieren mehr nötig.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛠️</div>
+                <h3>Einfache Verwaltung</h3>
+                <p>Erstelle unbegrenzt viele Profile. Verwalte Versionen von 1.20 bis 1.21+ und experimentiere frei.</p>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 HappyMC Client. Developed by LobiGmbH.</p>
+            <p>
+                <a href="https://github.com/HappyMC-Client/HappyMC-Client.github.io">GitHub Repository</a> • 
+                <a href="#">Support</a>
+            </p>
+            <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.6;">Not affiliated with Mojang or Microsoft.</p>
+        </footer>
     </div>
-
-    <footer>
-        <p>&copy; 2026 HappyMC Client. Nicht offiziell mit Mojang oder Microsoft verbunden.</p>
-        <p>
-            <a href="https://github.com/HappyMC-Client/HappyMC-Client.github.io">GitHub Repository</a> | 
-            <a href="#">Support</a> | 
-            <a href="#">Impressum</a>
-        </p>
-    </footer>
 
 </body>
 </html>
